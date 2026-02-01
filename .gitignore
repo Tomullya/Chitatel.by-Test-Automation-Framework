@@ -43,3 +43,6 @@ build/
 target/
 *.iml
 >>>>>>> 030ae84105a8a997fe322bfd93beb9ff08c9024f
+# IntelliJ IDEA
+.idea/
+*.iml
