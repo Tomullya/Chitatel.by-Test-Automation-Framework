@@ -29,6 +29,14 @@
             <version>${selenium.version}</version>
         </dependency>
 
+        <!-- Selenium DevTools (для Chrome 144, ближайший CDP) -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-devtools-v144</artifactId>
+            <version>4.40.0</version>
+            <scope>compile</scope>
+        </dependency>
+
         <!-- WebDriverManager -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
