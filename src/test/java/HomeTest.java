@@ -16,6 +16,13 @@ public class HomeTest {
     public void isLoginButtonEnabled() {
         homePage.clickLogin();
     }
+    @Test
+    public void homePageShouldOpenWithCorrectUrl(){
+        String expectedUrl = homePage.getHome_Url();
+
+        String actualUrl = Driver.getDriver().getCurrentUrl();
+        Assertions.assertEquals(actualUrl,expectedUrl);
+    }
 
     @AfterEach
     public void tearDown() {

@@ -16,6 +16,9 @@ public class HomePage {
     public void open() {
         driver.get(HOME_URL);
     }
+    public String getHome_Url(){
+        return HOME_URL;
+    }
 
     public void clickLogin() {
         driver.findElement(LOGIN_BUTTON).click();
