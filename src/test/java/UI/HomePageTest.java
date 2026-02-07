@@ -15,8 +15,7 @@ public class HomePageTest {
     public void openHomePage() {
         System.out.println("BEFORE EACH START");
         logger.info("Начало подготовки теста");
-        homePage = new HomePage();
-        homePage.openHomePage();
+        homePage = new HomePage().openHomePage();
         logger.info("Главня страница открыта");
     }
 
@@ -25,7 +24,7 @@ public class HomePageTest {
     public void homePageShouldOpenWithCorrectUrl() {
         logger.info("Тест: homePageShouldOpenWithCorrectUrl");
         String actualUrl = Driver.getDriver().getCurrentUrl();
-        Assertions.assertEquals(homePage.getHomePageUrl(), actualUrl, "Некорректный URL главной страницы");
+        Assertions.assertEquals(actualUrl, homePage.getCurrentHomePageUrl(), "Некорректный URL главной страницы");
         logger.info("URL главной страницы корректный");
     }
 
@@ -47,11 +46,17 @@ public class HomePageTest {
     @Test
     public void loginButtonShouldBeEnable() {
         logger.info("Тест: loginButtonShouldBeEnabled");
-        Assertions.assertDoesNotThrow(() -> {
-            homePage.isLoginButtonEnable();
-            logger.info("Кнопка входа активна");
-        });
+        Assertions.assertTrue(homePage.isLoginButtonEnabled(),"Кнопка входа активна");
+        logger.info("Кнопка входа активна");
     }
+
+    @Test
+    void loginButtonShouldBeClickable() {
+        logger.info("Тест: loginButtonShouldBeClickable");
+        Assertions.assertDoesNotThrow(() -> homePage.clickLoginButton(), "Кнопка Вход не кликабельна");
+        logger.info("Кнопка Вход кликабельна");
+    }
+
 
     @Test
     public void searchBarShouldBeDisplayed() {
@@ -63,10 +68,15 @@ public class HomePageTest {
     @Test
     public void searchBarShouldBeEnabled() {
         logger.info("Тест: searchBarShouldBeEnabled");
-        Assertions.assertDoesNotThrow(() -> {
-            homePage.isSearchBarEnable();
-        });
+        Assertions.assertTrue(homePage.isSearchBarEnabled(), "Строка поиска не активна");
         logger.info("Строка поиска активна");
+    }
+
+    @Test
+    void searchBarShouldBeClickable() {
+        logger.info("Тест: searchBarShouldBeClickable");
+        Assertions.assertDoesNotThrow(() -> homePage.clickSearchBar(),"Строка поиска не кликабельна");
+        logger.info("Строка поиска кликабельна");
     }
 
     @AfterEach
