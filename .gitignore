@@ -46,3 +46,8 @@ target/
 # IntelliJ IDEA
 .idea/
 *.iml
+
+# Logs
+*.log
+logs/
+target/logs/

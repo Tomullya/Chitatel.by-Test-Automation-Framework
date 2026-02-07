@@ -9,7 +9,7 @@
         </Console>
 
         <!-- Логи в файл -->
-        <File name="FileLogger" fileName="logs/test.log">
+        <File name="FileLogger" fileName="src/test/resources/logs/test.log">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} [%level] %c{1} - %msg%n"/>
         </File>
 
