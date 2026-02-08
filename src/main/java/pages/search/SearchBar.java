@@ -34,7 +34,7 @@ public class SearchBar {
     }
 
     public void clearButtonClick() {
-        waidriver.findElement(SearchLocator.CLEAR_BUTTON).click();
+        Wait.waitUntilClickable(SearchLocator.CLEAR_BUTTON).click();
     }
 
     public List<WebElement> getPositiveSearchResult() {

@@ -67,7 +67,21 @@ public class SearchBarTest {
         logger.info("Ничего не найдено, на странице не отображаются разделы содержащие товар отображается");
     }
 
+    @Test
+    public void clearButtonShouldBeClickableAndClearInput(){
+        searchBar.searchBarClick();
+        searchBar.inputValueInSearchBar("");
 
+        WebElement clearButton = Wait.waitUntilClickable(SearchLocator.CLEAR_BUTTON);
+        Assertions.assertTrue(clearButton.isDisplayed(),
+        "Кнопка Clear должна быть отображена после ввода текста");
+
+        clearButton.click();
+
+        Assertions.assertEquals("", searchBar.getSearchInputValue(),"Поле поиска должно быть очищено после нажатия Clear");
+         logger.info("Clear кнопка кликабельна и очищает строку поиска");
+
+    }
 
 
     @AfterEach
