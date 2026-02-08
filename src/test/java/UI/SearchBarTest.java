@@ -27,7 +27,7 @@ public class SearchBarTest {
     @Test
     public void SearchBarHasValidName(){
         String name =searchBar.getSearchBarName();
-        Assertions.assertEquals("Найдите книгу среди 6001 тысяч наименований", name,"Name у строки поиска некорректный");
+        Assertions.assertEquals("Найдите книгу среди 600 тысяч наименований", name,"Name у строки поиска некорректный");
         logger.info("Имя у строки поиска корректное");
     }
 
@@ -70,7 +70,7 @@ public class SearchBarTest {
     @Test
     public void clearButtonShouldBeClickableAndClearInput(){
         searchBar.searchBarClick();
-        searchBar.inputValueInSearchBar("");
+        searchBar.inputValueInSearchBar("Aybubkznjhyfz geirf");
 
         WebElement clearButton = Wait.waitUntilClickable(SearchLocator.CLEAR_BUTTON);
         Assertions.assertTrue(clearButton.isDisplayed(),
