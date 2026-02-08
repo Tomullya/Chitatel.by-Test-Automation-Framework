@@ -79,8 +79,8 @@ public class HomePageTest {
     }
 
     @AfterEach
-    public void tearDown() {
-        logger.info("Окончание тестаб браузер закрыт");
+    public void quit() {
+        logger.info("Окончание теста, браузер закрыт");
         Driver.quit();
     }
 }

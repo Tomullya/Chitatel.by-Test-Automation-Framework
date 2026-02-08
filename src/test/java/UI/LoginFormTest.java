@@ -35,7 +35,7 @@ public class LoginFormTest {
     public void passwordInputShouldBeDisplayed() {
         logger.info("Проверка отображения поля для ввода Password");
         Assertions.assertTrue(loginForm.isPasswordInputDisplayed(), "Поле вввода Password не отображается");
-        //logger.info("Поле ввода Password отображается");
+        logger.info("Поле ввода Password отображается");
     }
 
     @Test

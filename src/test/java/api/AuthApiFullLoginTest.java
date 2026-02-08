@@ -37,7 +37,7 @@ public class AuthApiFullLoginTest {
 
         assertAll("Login",
                 () -> assertEquals(200, loginApiService.getStatusCode(),"Статус код не соответсвует ожидаемому"),
-                () -> assertEquals("Вы не указали \"Email1\"", loginApiService.getEmailErrorMessage(),"Ошибка не соответствует ожиадемой"));
+                () -> assertEquals("Вы не указали \"Email\"", loginApiService.getEmailErrorMessage(),"Ошибка не соответствует ожиадемой"));
 
 
         logger.info("Тест авторизации успешно завершен");

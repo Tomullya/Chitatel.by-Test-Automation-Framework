@@ -37,8 +37,6 @@ public class LoginForm {
         driver.findElement(EMAIL_INPUT).sendKeys("test@test.com");
     }
 
-
-
     public boolean isPasswordInputDisplayed() {
         return Wait.waitUntilVisible(PASSWORD_INPUT).isDisplayed();
     }
