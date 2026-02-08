@@ -15,7 +15,6 @@ public class LoginFormTest {
 
     @BeforeEach
     public void LoginForm() {
-        logger.info("начало подготовки теста");
         homePage = new HomePage().openHomePage();
         logger.info("Главная страница открыта");
         loginForm = homePage.openLoginForm();

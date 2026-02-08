@@ -1,69 +1,79 @@
 package api;
 
-import io.restassured.response.Response;
-import org.junit.jupiter.api.Test;
+import UI.*;
+import org.apache.logging.log4j.*;
+import org.junit.jupiter.api.*;
+import utils.*;
 
-import java.util.Map;
-
-import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AuthApiFullLoginTest {
-
-    private static final String BASE_URL = "https://chitatel.by";
-
-    private static final String USER_AGENT =
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
-                    "AppleWebKit/537.36 (KHTML, like Gecko) " +
-                    "Chrome/121.0.0.0 Safari/537.36";
+    private static final Logger logger = LoggerUtil.getlogger(LoginFormTest.class);
 
     @Test
-    void loginWithEmptyCredentials_shouldReturn422() {
+    public void testForLoginWithEmptyCredentials() {
+        LoginApiService loginApiService = new LoginApiService();
+        loginApiService.doGetRequest();
+        logger.info("Проверка логина с пустыми email и паролем");
+        loginApiService.doPostLogin("","");
+        loginApiService.printResponse();
 
-        // ---------- STEP 1: GET / (инициализация сессии) ----------
-        Response getResponse =
-                given()
-                        .baseUri(BASE_URL)
-                        .header("User-Agent", USER_AGENT)
-                        .header("Accept",
-                                "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
-                        .header("Accept-Language",
-                                "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7")
-                        .when()
-                        .get("/");
+        assertAll("Login",
+                () -> assertEquals(200, loginApiService.getStatusCode(),"Статус код не соответсвует ожидаемому"),
+                () -> assertEquals("Вы не указали \"Email\"", loginApiService.getEmailErrorMessage(),"Ошибка не соответствует ожиадемой"),
+                () -> assertEquals("Вы не указали \"Пароль\"", loginApiService.getEmailPasswordMessage(), "Ошибка не соответствует ожиадемой"));
 
-        getResponse.then()
-                .statusCode(200);
-
-        // ---------- извлекаем cookies и CSRF ----------
-        Map<String, String> cookies = getResponse.getCookies();
-
-        String csrfToken =
-                getResponse.htmlPath()
-                        .getString("**.find { it.@name == 'csrf-token' }.@content");
-
-        // ---------- STEP 2: POST /login ----------
-        String body =
-                "email=&password=&remember_me=1&_token=" + csrfToken;
-
-        Response postResponse =
-                given()
-                        .baseUri(BASE_URL)
-                        .header("User-Agent", USER_AGENT)
-                        .header("Accept",
-                                "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
-                        .header("Accept-Language",
-                                "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7")
-                        .header("Content-Type", "application/x-www-form-urlencoded")
-                        .header("Origin", BASE_URL)
-                        .header("Referer", BASE_URL + "/login")
-                        .cookies(cookies)
-                        .body(body)
-                        .when()
-                        .post("/login");
-
-        // ---------- ASSERT ----------
-        postResponse.then()
-                .log().all()
-                .statusCode(200);
+        logger.info("Тест авторизации успешно завершен");
     }
+
+    @Test
+    public void testForLoginWithEmptyEmail() {
+        LoginApiService loginApiService = new LoginApiService();
+        loginApiService.doGetRequest();
+        logger.info("Проверка логина с пустым email, пароль заполнен");
+        loginApiService.doPostLogin("","qwerty");
+        loginApiService.printResponse();
+
+        assertAll("Login",
+                () -> assertEquals(200, loginApiService.getStatusCode(),"Статус код не соответсвует ожидаемому"),
+                () -> assertEquals("Вы не указали \"Email1\"", loginApiService.getEmailErrorMessage(),"Ошибка не соответствует ожиадемой"));
+
+
+        logger.info("Тест авторизации успешно завершен");
+    }
+
+    @Test
+    public void testForLoginWithEmptyPassword() {
+        LoginApiService loginApiService = new LoginApiService();
+        loginApiService.doGetRequest();
+        logger.info("Проверка логина с пустым паролем, email заполнен");
+        loginApiService.doPostLogin("test@test.com","");
+        loginApiService.printResponse();
+
+        assertAll("Login",
+                () -> assertEquals(200, loginApiService.getStatusCode(),"Статус код не соответсвует ожидаемому"),
+                () -> assertEquals("Вы не указали \"Пароль\"", loginApiService.getEmailPasswordMessage(), "Ошибка не соответствует ожиадемой"));
+
+
+                logger.info("Тест авторизации успешно завершен");
+    }
+
+    @Test
+    public void testForLoginWithInvalidCredentials() {
+        LoginApiService loginApiService = new LoginApiService();
+        loginApiService.doGetRequest();
+        logger.info("Проверка логина с неверными email и паролем");
+        loginApiService.doPostLogin("test@test.com","qwerty");
+        loginApiService.printResponse();
+
+        assertAll("Login",
+                () -> assertEquals(200, loginApiService.getStatusCode(),"Статус код не соответсвует ожидаемому"),
+                () -> assertEquals("Неправильный e-mail или пароль!", loginApiService.getInvalidCredentialsErrorMessage(),"Ошибка не соответствует ожиадемой"));
+
+
+        logger.info("Тест авторизации успешно завершен");
+    }
+
 }
+
