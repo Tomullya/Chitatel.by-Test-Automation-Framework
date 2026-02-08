@@ -2,14 +2,15 @@ package pages;
 
 import driver.*;
 import org.openqa.selenium.*;
+import utils.*;
 
 public class LoginForm {
     private WebDriver driver;
 
     private final By EMAIL_BUTTON = By.xpath("//a[contains(@class,'_js-tab-btn') and normalize-space()='Email']");
     private final By EMAIL_INPUT = By.xpath("//input[@type='email' and @name='email']");
-    private final By PASSWORD_INPUT = By.xpath("//input[@class='input__default' and @name='password_phone']");
-    private final By SUBMIT_BUTTON = By.id("send-login-by-phone");
+    private final By PASSWORD_INPUT = By.xpath("//input[@class='input__default' and @name='password']");
+    private final By SUBMIT_BUTTON = By.id("send-login");
 
 
     public LoginForm() {
@@ -21,24 +22,25 @@ public class LoginForm {
 
     }
     public void clickEmailButton(){
-        driver.findElement(EMAIL_BUTTON).click();
+        Wait.waitUntilClickable(EMAIL_BUTTON).click();
     }
 
-    public boolean isPhoneInputDisplayed() {
-        return driver.findElement(EMAIL_INPUT).isDisplayed();
+    public boolean isEmailInputDisplayed() {
+        return Wait.waitUntilVisible(EMAIL_INPUT).isDisplayed();
     }
 
-    public void clickPhoneInput() {
+    public void clickEmailInput() {
         driver.findElement(EMAIL_INPUT).click();
     }
 
-    public void enterPhone() {
+    public void enterEmail() {
         driver.findElement(EMAIL_INPUT).sendKeys("test@test.com");
     }
 
 
+
     public boolean isPasswordInputDisplayed() {
-        return driver.findElement(PASSWORD_INPUT).isDisplayed();
+        return Wait.waitUntilVisible(PASSWORD_INPUT).isDisplayed();
     }
 
     public void clickPasswordInput() {
@@ -50,7 +52,7 @@ public class LoginForm {
     }
 
     public boolean isSubmitButtonDisplayed() {
-        return driver.findElement(SUBMIT_BUTTON).isDisplayed();
+        return Wait.waitUntilVisible(SUBMIT_BUTTON).isDisplayed();
     }
 
     public void clickSubmitButton() {

@@ -45,6 +45,11 @@ public class HomePage {
         driver.findElement(LOGIN_BUTTON).click();
     }
 
+    public LoginForm openLoginForm(){
+        clickLoginButton();
+        return new LoginForm();
+    }
+
 
     public boolean isSearchBarDisplayed() {
         return driver.findElement(SEARCH_BAR).isDisplayed();

@@ -13,7 +13,6 @@ public class HomePageTest {
 
     @BeforeEach
     public void openHomePage() {
-        System.out.println("BEFORE EACH START");
         logger.info("Начало подготовки теста");
         homePage = new HomePage().openHomePage();
         logger.info("Главня страница открыта");
@@ -81,7 +80,7 @@ public class HomePageTest {
 
     @AfterEach
     public void tearDown() {
-        logger.info("Окончание теста");
+        logger.info("Окончание тестаб браузер закрыт");
         Driver.quit();
     }
 }
