@@ -3,6 +3,7 @@ package api;
 import UI.*;
 import org.apache.logging.log4j.*;
 import org.junit.jupiter.api.*;
+import testData.*;
 import utils.*;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
@@ -32,7 +33,7 @@ public class AuthApiFullLoginTest {
         LoginApiService loginApiService = new LoginApiService();
         loginApiService.doGetRequest();
         logger.info("Проверка логина с пустым email, пароль заполнен");
-        loginApiService.doPostLogin("","qwerty");
+        loginApiService.doPostLogin("", TestDataGenerator.randomPassword());
         loginApiService.printResponse();
 
         assertAll("Login",
@@ -48,7 +49,7 @@ public class AuthApiFullLoginTest {
         LoginApiService loginApiService = new LoginApiService();
         loginApiService.doGetRequest();
         logger.info("Проверка логина с пустым паролем, email заполнен");
-        loginApiService.doPostLogin("test@test.com","");
+        loginApiService.doPostLogin(TestDataGenerator.randomEmail(),"");
         loginApiService.printResponse();
 
         assertAll("Login",
@@ -64,7 +65,7 @@ public class AuthApiFullLoginTest {
         LoginApiService loginApiService = new LoginApiService();
         loginApiService.doGetRequest();
         logger.info("Проверка логина с неверными email и паролем");
-        loginApiService.doPostLogin("test@test.com","qwerty");
+        loginApiService.doPostLogin(TestDataGenerator.randomEmail(), TestDataGenerator.randomPassword());
         loginApiService.printResponse();
 
         assertAll("Login",

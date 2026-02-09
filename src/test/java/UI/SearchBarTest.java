@@ -4,7 +4,7 @@ import driver.*;
 import org.apache.logging.log4j.*;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.*;
-import pages.*;
+import pages.home.*;
 import pages.search.*;
 import utils.*;
 

@@ -1,4 +1,4 @@
-package pages;
+package pages.login;
 
 import driver.*;
 import org.openqa.selenium.*;

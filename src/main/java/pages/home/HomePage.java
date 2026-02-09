@@ -1,7 +1,8 @@
-package pages;
+package pages.home;
 
 import driver.*;
 import org.openqa.selenium.*;
+import pages.login.*;
 
 
 public class HomePage {

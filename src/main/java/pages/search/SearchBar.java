@@ -33,9 +33,9 @@ public class SearchBar {
         driver.findElement(SearchLocator.SEARCH_BUTTON).click();
     }
 
-    public void clearButtonClick() {
+    /*public void clearButtonClick() {
         Wait.waitUntilClickable(SearchLocator.CLEAR_BUTTON).click();
-    }
+    }*/
 
     public List<WebElement> getPositiveSearchResult() {
         return driver.findElements(SearchLocator.SEARCH_POSITIVE_RESULT);

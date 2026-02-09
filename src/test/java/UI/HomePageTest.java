@@ -2,7 +2,7 @@ package UI;
 
 import driver.Driver;
 import org.apache.logging.log4j.*;
-import pages.HomePage;
+import pages.home.HomePage;
 import org.junit.jupiter.api.*;
 import utils.*;
 

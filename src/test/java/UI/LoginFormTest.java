@@ -3,7 +3,8 @@ package UI;
 import driver.*;
 import org.apache.logging.log4j.*;
 import org.junit.jupiter.api.*;
-import pages.*;
+import pages.home.*;
+import pages.login.*;
 import utils.*;
 
 public class LoginFormTest {
@@ -46,7 +47,7 @@ public class LoginFormTest {
     }
 
     @AfterEach
-    public void tearDown() {
+    public void quit() {
         logger.info("Окончание теста, браузер закрыт");
         Driver.quit();
     }
