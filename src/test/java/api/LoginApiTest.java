@@ -1,6 +1,6 @@
 package api;
 
-import UI.*;
+import io.qameta.allure.*;
 import org.apache.logging.log4j.*;
 import org.junit.jupiter.api.*;
 import testData.*;
@@ -9,10 +9,18 @@ import utils.*;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class AuthApiFullLoginTest {
-    private static final Logger logger = LoggerUtil.getlogger(LoginFormTest.class);
+@Epic("API")
+@Feature("Авторизация")
+public class LoginApiTest {
+    private static final Logger logger = LoggerUtil.getlogger(LoginApiTest.class);
+
 
     @Test
+    @Story("Негативные сценарии логина")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("Логин с пустыми email и паролем")
+    @Description("Проверка ошибки при попытке логина с пустыми email и паролем.")
+
     public void testForLoginWithEmptyCredentials() {
         LoginApiService loginApiService = new LoginApiService();
         loginApiService.doGetRequest();
@@ -29,6 +37,11 @@ public class AuthApiFullLoginTest {
     }
 
     @Test
+    @Story("Негативные сценарии логина")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("Логин с пустым email")
+    @Description("Проверка ошибки при логине с пустым email и заполненным паролем.")
+
     public void testForLoginWithEmptyEmail() {
         LoginApiService loginApiService = new LoginApiService();
         loginApiService.doGetRequest();
@@ -45,6 +58,11 @@ public class AuthApiFullLoginTest {
     }
 
     @Test
+    @Story("Негативные сценарии логина")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("Логин с пустым паролем")
+    @Description("Проверка ошибки при логине с заполненным email и пустым паролем.")
+
     public void testForLoginWithEmptyPassword() {
         LoginApiService loginApiService = new LoginApiService();
         loginApiService.doGetRequest();
@@ -61,6 +79,11 @@ public class AuthApiFullLoginTest {
     }
 
     @Test
+    @Story("Негативные сценарии логина")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("Логин с неверными учетными данными")
+    @Description("Проверка ошибки при логине с неверным email и паролем.")
+
     public void testForLoginWithInvalidCredentials() {
         LoginApiService loginApiService = new LoginApiService();
         loginApiService.doGetRequest();

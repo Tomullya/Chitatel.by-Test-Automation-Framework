@@ -73,7 +73,7 @@
             <version>6.0.0</version>
         </dependency>
 
-       <!-- Hamcrest (если ещё нет) -->
+        <!-- Hamcrest (если ещё нет) -->
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest</artifactId>
@@ -91,12 +91,16 @@
             <artifactId>javafaker</artifactId>
             <version>1.0.2</version>
         </dependency>
-
+        <!-- Allure JUnit 5 -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-junit5</artifactId>
+            <version>2.25.0</version>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
-
             <!-- Maven Surefire -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -106,7 +110,11 @@
                     <useModulePath>false</useModulePath>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <groupId>io.qameta.allure</groupId>
+                <artifactId>allure-maven</artifactId>
+                <version>2.11.2</version>
+            </plugin>
         </plugins>
     </build>
 

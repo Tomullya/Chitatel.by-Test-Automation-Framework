@@ -3,6 +3,7 @@ package pages.home;
 import driver.*;
 import org.openqa.selenium.*;
 import pages.login.*;
+import utils.*;
 
 
 public class HomePage {
@@ -34,7 +35,7 @@ public class HomePage {
     }
 
     public boolean isLoginButtonDisplayed() {
-        return driver.findElement(LOGIN_BUTTON).isDisplayed();
+        return Wait.waitUntilVisible(LOGIN_BUTTON).isDisplayed();
     }
 
     public boolean isLoginButtonEnabled() {

@@ -1,5 +1,6 @@
 package api;
 
+import io.qameta.allure.*;
 import io.restassured.response.*;
 import org.apache.logging.log4j.*;
 import org.junit.jupiter.api.*;
@@ -7,11 +8,17 @@ import testData.*;
 import utils.*;
 
 
+@Epic("API")
+@Feature("Поиск товаров")
 public class SearchApiTest {
     private static final Logger logger = LoggerUtil.getlogger(SearchApiTest.class);
 
 
     @Test
+    @Story("Поиск товара")
+    @Severity(SeverityLevel.NORMAL)
+    @DisplayName("Поиск несуществующего товара")
+    @Description("Отправка поискового запроса с несуществующим названием. Ожидается сообщение 'Ничего не найдено'.")
     public void testSearchWithQueryNegative() {
 
         String searchGoodInRU = TestDataGenerator.randomRuWord();
@@ -35,6 +42,11 @@ public class SearchApiTest {
     }
 
     @Test
+    @Story("Поиск товара")
+    @Severity(SeverityLevel.CRITICAL)
+    @DisplayName("Поиск существующего товара")
+    @Description("Отправка поискового запроса с существующим названием. Ожидается, что результаты поиска будут найдены.")
+
     public void testSearchWithQueryPositive() {
 
         String searchGoodInEn = TestDataGenerator.randomEnWord();

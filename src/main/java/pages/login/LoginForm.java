@@ -34,7 +34,7 @@ public class LoginForm {
     }
 
     public void enterEmail() {
-        driver.findElement(EMAIL_INPUT).sendKeys("test@test.com");
+        driver.findElement(EMAIL_INPUT).sendKeys("email");
     }
 
     public boolean isPasswordInputDisplayed() {
@@ -46,7 +46,7 @@ public class LoginForm {
     }
 
     public void enterPassword() {
-        driver.findElement(PASSWORD_INPUT).sendKeys("qwerty");
+        driver.findElement(PASSWORD_INPUT).sendKeys("password");
     }
 
     public boolean isSubmitButtonDisplayed() {

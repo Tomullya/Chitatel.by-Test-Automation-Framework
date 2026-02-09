@@ -43,7 +43,7 @@ public class HomePageTest {
     }
 
     @Test
-    public void loginButtonShouldBeEnable() {
+    public void loginButtonShouldBeEnabled() {
         logger.info("Тест: loginButtonShouldBeEnabled");
         Assertions.assertTrue(homePage.isLoginButtonEnabled(),"Кнопка входа активна");
         logger.info("Кнопка входа активна");

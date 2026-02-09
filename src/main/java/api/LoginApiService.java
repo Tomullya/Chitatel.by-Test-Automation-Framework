@@ -40,7 +40,7 @@ public class LoginApiService {
     public Response doPostLogin(String email, String password) {
         if (cookies == null || csrfToken == null) {
             throw new IllegalStateException(
-                    "Сессия не инициализированаю сделай doGetRequest первым"
+                    "Сессия не инициализирована сделай doGetRequest первым"
             );
         }
         String body =
