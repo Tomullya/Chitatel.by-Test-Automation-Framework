@@ -10,7 +10,7 @@ public class LoginForm {
     private final By EMAIL_BUTTON = By.xpath("//a[contains(@class,'_js-tab-btn') and normalize-space()='Email']");
     private final By EMAIL_INPUT = By.xpath("//input[@type='email' and @name='email']");
     private final By PASSWORD_INPUT = By.xpath("//input[@class='input__default' and @name='password']");
-    private final By SUBMIT_BUTTON = By.id("send-login");
+    private final By SUBMIT_BUTTON = By.xpath("//input[@id='send-login']");
 
 
     public LoginForm() {

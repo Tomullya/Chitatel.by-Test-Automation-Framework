@@ -43,10 +43,11 @@ public class HomePageTest {
     }
 
     @Test
-    public void loginButtonShouldBeEnabled() {
+    public void loginButtonShouldOpenLoginPopup() {
         logger.info("Тест: loginButtonShouldBeEnabled");
-        Assertions.assertTrue(homePage.isLoginButtonEnabled(),"Кнопка входа активна");
-        logger.info("Кнопка входа активна");
+        homePage.clickLoginButton();
+        Assertions.assertTrue(homePage.isLoginPopUpWindowVisible(),"Окно логина не появилось после клика по кнопке Вход");
+        logger.info("Окно логина появилось после клика по кнопке Вход");
     }
 
     @Test
