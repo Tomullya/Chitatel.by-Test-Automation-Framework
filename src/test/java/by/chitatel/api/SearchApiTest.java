@@ -1,11 +1,11 @@
-package api;
+package by.chitatel.api;
 
+import by.chitatel.ui.testData.*;
+import by.chitatel.utils.*;
 import io.qameta.allure.*;
 import io.restassured.response.*;
 import org.apache.logging.log4j.*;
 import org.junit.jupiter.api.*;
-import testData.*;
-import utils.*;
 
 
 @Epic("API")

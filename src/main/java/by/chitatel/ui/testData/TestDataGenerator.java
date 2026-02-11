@@ -1,4 +1,4 @@
-package testData;
+package by.chitatel.ui.testData;
 
 import com.github.javafaker.*;
 

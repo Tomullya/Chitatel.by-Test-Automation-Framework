@@ -1,11 +1,10 @@
-package UI;
+package by.chitatel.ui;
 
-import driver.Driver;
+import by.chitatel.ui.driver.Driver;
+import by.chitatel.utils.*;
 import org.apache.logging.log4j.*;
-import pages.home.HomePage;
+import by.chitatel.ui.pages.home.HomePage;
 import org.junit.jupiter.api.*;
-import testData.*;
-import utils.*;
 
 public class HomePageTest {
 

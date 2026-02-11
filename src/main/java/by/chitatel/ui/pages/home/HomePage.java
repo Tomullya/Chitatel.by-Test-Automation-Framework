@@ -1,9 +1,10 @@
-package pages.home;
+package by.chitatel.ui.pages.home;
 
-import driver.*;
+import by.chitatel.ui.driver.*;
+import by.chitatel.ui.pages.login.*;
+import by.chitatel.ui.pages.search.*;
 import org.openqa.selenium.*;
-import pages.login.*;
-import utils.Wait;
+import by.chitatel.utils.Wait;
 
 
 public class HomePage {
@@ -63,6 +64,10 @@ public class HomePage {
 
     public boolean isSearchBarDisplayed() {
         return Wait.waitUntilVisible(SEARCH_BAR).isDisplayed();
+    }
+
+    public SearchBar getSearchBar() {
+        return new SearchBar();
     }
 
     public void clickSearchBar() {

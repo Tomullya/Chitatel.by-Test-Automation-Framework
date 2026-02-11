@@ -1,10 +1,10 @@
-package api;
+package by.chitatel.api;
 
+import by.chitatel.ui.testData.*;
+import by.chitatel.utils.*;
 import io.qameta.allure.*;
 import org.apache.logging.log4j.*;
 import org.junit.jupiter.api.*;
-import testData.*;
-import utils.*;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;

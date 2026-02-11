@@ -1,4 +1,4 @@
-package api;
+package by.chitatel.api;
 
 import io.qameta.allure.*;
 import io.restassured.response.Response;
