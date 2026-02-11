@@ -1,4 +1,4 @@
-package driver;
+package by.chitatel.ui.driver;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.*;
