@@ -9,64 +9,60 @@ import org.junit.jupiter.api.*;
 
 
 @Epic("API")
-@Feature("Поиск товаров")
+@Feature("Search functionality")
 public class SearchApiTest {
     private static final Logger logger = LoggerUtil.getlogger(SearchApiTest.class);
 
+    private SearchApiService searchApiService;
+
+
+    @BeforeEach
+    void setUpForSearch() {
+
+        searchApiService = new SearchApiService();
+        searchApiService.initSession();
+    }
+
 
     @Test
-    @Story("Поиск товара")
+    @Story("Product search")
     @Severity(SeverityLevel.NORMAL)
-    @DisplayName("Поиск несуществующего товара")
-    @Description("Отправка поискового запроса с несуществующим названием. Ожидается сообщение 'Ничего не найдено'.")
+    @DisplayName("Search with non-existing product")
+    @Description("Send search request with non-existing product name. Expect 'Nothing found' message.")
     public void testSearchWithQueryNegative() {
-
         String searchGoodInRU = TestDataGenerator.randomRuWord();
-
-        System.out.println(searchGoodInRU);
-
-        SearchApiService searchApiService = new SearchApiService();
-        searchApiService.doGetRequest();
         Response response = searchApiService.doSearch(searchGoodInRU);
 
+        logger.info("Response status code: {}", response.getStatusCode());
 
-        logger.info("Статус код ответа: {}", response.getStatusCode());
-
-        Assertions.assertEquals(200, response.getStatusCode(), "Статус код ответа не совпадает с ожидаемым");
+        Assertions.assertEquals(200, response.getStatusCode(), "Unexpected status code");
 
         String responseBody = response.getBody().asString();
-        Assertions.assertTrue(responseBody.contains("Ничего не найдено"),
-                "Искомый товар " + searchGoodInRU + " не был найден");
 
-        logger.info("Искомый товар " + searchGoodInRU + "  был найден");
+        Assertions.assertTrue(responseBody.contains("Ничего не найдено"),
+                "Expected 'Nothing found' message for query: " + searchGoodInRU);
+
+        logger.info("The product  " + searchGoodInRU + "  was found");
     }
 
     @Test
-    @Story("Поиск товара")
+    @Story("Product search")
     @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Поиск существующего товара")
-    @Description("Отправка поискового запроса с существующим названием. Ожидается, что результаты поиска будут найдены.")
-
+    @DisplayName("Search with existing product")
+    @Description("Send search request with existing product name. Expect search results.")
     public void testSearchWithQueryPositive() {
-
         String searchGoodInEn = TestDataGenerator.randomEnWord();
-
-        System.out.println(searchGoodInEn);
-
-        SearchApiService searchApiService = new SearchApiService();
-        searchApiService.doGetRequest();
         Response response = searchApiService.doSearch(searchGoodInEn);
 
+        logger.info("Response status code: {}", response.getStatusCode());
 
-        logger.info("Статус код ответа: {}", response.getStatusCode());
-
-        Assertions.assertEquals(200, response.getStatusCode(), "Статус код ответа не совпадает с ожидаемым");
+        Assertions.assertEquals(200, response.getStatusCode(), "Unexpected status code");
 
         String responseBody = response.getBody().asString();
         Assertions.assertFalse(responseBody.contains("Ничего не найдено"),
-                "Искомый товар " + searchGoodInEn + " не был найден");
+                "Expected search results for: " + searchGoodInEn + " not found");
 
-        logger.info("Искомый товар " + searchGoodInEn + "  был найден");
+        logger.info("The product " + searchGoodInEn + " was found successfully");
     }
 
 

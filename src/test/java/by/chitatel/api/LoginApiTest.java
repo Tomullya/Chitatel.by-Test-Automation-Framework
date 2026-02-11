@@ -3,6 +3,7 @@ package by.chitatel.api;
 import by.chitatel.ui.testData.*;
 import by.chitatel.utils.*;
 import io.qameta.allure.*;
+import io.restassured.response.*;
 import org.apache.logging.log4j.*;
 import org.junit.jupiter.api.*;
 
@@ -10,93 +11,100 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Epic("API")
-@Feature("Авторизация")
+@Feature("Authorization")
 public class LoginApiTest {
     private static final Logger logger = LoggerUtil.getlogger(LoginApiTest.class);
+    private LoginApiService loginApiService;
 
+    @BeforeEach
+    public void setUpConnection() {
+        logger.info("Initializing API session before test");
+        loginApiService = new LoginApiService();
+        loginApiService.initSession();
+    }
 
     @Test
-    @Story("Негативные сценарии логина")
+    @Story("Negative login scenarios")
     @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Логин с пустыми email и паролем")
-    @Description("Проверка ошибки при попытке логина с пустыми email и паролем.")
+    @DisplayName("Login with empty email and password")
+    @Description("Verify error messages when both email and password are empty.")
 
     public void testForLoginWithEmptyCredentials() {
-        LoginApiService loginApiService = new LoginApiService();
-        loginApiService.doGetRequest();
-        logger.info("Проверка логина с пустыми email и паролем");
-        loginApiService.doPostLogin("","");
-        loginApiService.printResponse();
+        logger.info("Testing login with empty email and password");
 
-        assertAll("Login",
-                () -> assertEquals(200, loginApiService.getStatusCode(),"Статус код не соответсвует ожидаемому"),
-                () -> assertEquals("Вы не указали \"Email\"", loginApiService.getEmailErrorMessage(),"Ошибка не соответствует ожиадемой"),
-                () -> assertEquals("Вы не указали \"Пароль\"", loginApiService.getEmailPasswordMessage(), "Ошибка не соответствует ожиадемой"));
+        Response response = loginApiService.doPostLogin("", "");
+        response.then().log().all();
 
-        logger.info("Тест авторизации успешно завершен");
+
+        assertAll("Login validation",
+                () -> assertEquals(400, loginApiService.getStatusCode(), "Unexpected status code"),
+                () -> assertEquals("Вы не указали \"Email\"", loginApiService.getEmailErrorMessage(), "Unexpected error message"),
+                () -> assertEquals("Вы не указали \"Пароль\"", loginApiService.getEmailPasswordMessage(), "Unexpected error message\""));
+
+        logger.info("Test completed successfully");
     }
 
     @Test
-    @Story("Негативные сценарии логина")
+    @Story("Negative login scenarios")
     @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Логин с пустым email")
-    @Description("Проверка ошибки при логине с пустым email и заполненным паролем.")
+    @DisplayName("Login with empty email")
+    @Description("Verify error message when email is empty.")
 
     public void testForLoginWithEmptyEmail() {
-        LoginApiService loginApiService = new LoginApiService();
-        loginApiService.doGetRequest();
-        logger.info("Проверка логина с пустым email, пароль заполнен");
-        loginApiService.doPostLogin("", TestDataGenerator.randomPassword());
-        loginApiService.printResponse();
+
+        logger.info("Testing login with empty email");
+
+        Response response = loginApiService
+                .doPostLogin("", TestDataGenerator.randomPassword());
+
+        response.then().log().all();
 
         assertAll("Login",
-                () -> assertEquals(200, loginApiService.getStatusCode(),"Статус код не соответсвует ожидаемому"),
-                () -> assertEquals("Вы не указали \"Email\"", loginApiService.getEmailErrorMessage(),"Ошибка не соответствует ожиадемой"));
+                () -> assertEquals(200, loginApiService.getStatusCode(), "Unexpected status code"),
+                () -> assertEquals("Вы не указали \"Email\"", loginApiService.getEmailErrorMessage(), "Unexpected error message"));
 
-
-        logger.info("Тест авторизации успешно завершен");
+        logger.info("Test completed successfully");
     }
 
     @Test
-    @Story("Негативные сценарии логина")
+    @Story("Negative login scenarios")
     @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Логин с пустым паролем")
-    @Description("Проверка ошибки при логине с заполненным email и пустым паролем.")
+    @DisplayName("Login with empty password")
+    @Description("Verify error message when password is empty.")
 
     public void testForLoginWithEmptyPassword() {
-        LoginApiService loginApiService = new LoginApiService();
-        loginApiService.doGetRequest();
-        logger.info("Проверка логина с пустым паролем, email заполнен");
-        loginApiService.doPostLogin(TestDataGenerator.randomEmail(),"");
-        loginApiService.printResponse();
+        logger.info("Testing login with empty password");
+
+        Response response = loginApiService.doPostLogin(TestDataGenerator.randomEmail(), "");
+        response.then().log().all();
 
         assertAll("Login",
-                () -> assertEquals(200, loginApiService.getStatusCode(),"Статус код не соответсвует ожидаемому"),
-                () -> assertEquals("Вы не указали \"Пароль\"", loginApiService.getEmailPasswordMessage(), "Ошибка не соответствует ожиадемой"));
+                () -> assertEquals(200, loginApiService.getStatusCode(), "Unexpected status code"),
+                () -> assertEquals("Вы не указали \"Пароль\"", loginApiService.getEmailPasswordMessage(), "Unexpected error message"));
 
-
-                logger.info("Тест авторизации успешно завершен");
+        logger.info("Test completed successfully");
     }
 
     @Test
-    @Story("Негативные сценарии логина")
+    @Story("Negative login scenarios")
     @Severity(SeverityLevel.CRITICAL)
-    @DisplayName("Логин с неверными учетными данными")
-    @Description("Проверка ошибки при логине с неверным email и паролем.")
+    @DisplayName("Login with invalid credentials")
+    @Description("Verify error message when email and password are incorrect.")
 
     public void testForLoginWithInvalidCredentials() {
-        LoginApiService loginApiService = new LoginApiService();
-        loginApiService.doGetRequest();
-        logger.info("Проверка логина с неверными email и паролем");
-        loginApiService.doPostLogin(TestDataGenerator.randomEmail(), TestDataGenerator.randomPassword());
-        loginApiService.printResponse();
+        logger.info("Testing login with invalid credentials");
+
+        Response response = loginApiService
+                .doPostLogin(TestDataGenerator.randomEmail(),
+                        TestDataGenerator.randomPassword());
+
+        response.then().log().all();
 
         assertAll("Login",
-                () -> assertEquals(200, loginApiService.getStatusCode(),"Статус код не соответсвует ожидаемому"),
-                () -> assertEquals("Неправильный e-mail или пароль!", loginApiService.getInvalidCredentialsErrorMessage(),"Ошибка не соответствует ожиадемой"));
+                () -> assertEquals(200, loginApiService.getStatusCode(), "Unexpected status code"),
+                () -> assertEquals("Неправильный e-mail или пароль!", loginApiService.getInvalidCredentialsErrorMessage(), "Unexpected error message"));
 
-
-        logger.info("Тест авторизации успешно завершен");
+        logger.info("Test completed successfully");
     }
 
 }
