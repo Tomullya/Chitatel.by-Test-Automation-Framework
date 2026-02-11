@@ -21,9 +21,6 @@ public class SearchBar {
         return Wait.waitUntilVisible(SEARCH_BAR_PLACEHOLDER_NAME).getDomAttribute("placeholder");
     }
 
-    /*public void searchBarClick() {
-        Wait.waitUntilVisible(SEARCH_BAR).click();
-    }*/
 
     public void inputValueInSearchBar(String value) {
         WebElement input = driver.findElement(SEARCH_BAR);

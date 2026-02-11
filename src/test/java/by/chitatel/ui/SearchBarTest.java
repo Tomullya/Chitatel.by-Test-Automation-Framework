@@ -86,22 +86,6 @@ public class SearchBarTest {
         logger.info("Negative search test passed successfully, nothing was found");
     }
 
-
-    @Test
-    public void searchShouldReturnNothingFoundMessage() {
-        searchBar.search(TestDataGenerator.randomEnWord());
-
-        Assertions.assertTrue(
-                searchBar.getProductImages().isEmpty(),
-                "Изображения товаров не должны отображаться"
-        );
-
-        Assertions.assertTrue(
-                searchBar.isNothingFoundMessageDisplayed(),
-                "Сообщение 'Ничего не найдено' должно отображаться"
-        );
-    }
-
     @Test
     public void clearButtonShouldClearSearchInput() {
         logger.info("Test: Verifying clear search input functionality");
@@ -128,7 +112,7 @@ public class SearchBarTest {
 
     @AfterEach
     public void quit() {
-        logger.info("Окончание теста, браузер закрыт");
+        logger.info("Test finished. Closing browser.");
         Driver.quit();
     }
 }
