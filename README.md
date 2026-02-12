@@ -1,5 +1,11 @@
 This project represents automated testing of the online bookstore Chitatel.by.
+This project demonstrates my skills as a Junior Automation QA Engineer, including:
 
+UI & API automation
+Framework structure design
+CI integration
+Logging & reporting setup
+Problem-solving in real-world scenario
 The goal of the project is to build a scalable and maintainable UI + API automation framework that covers critical business functionality of the application.
 
 The solution includes:
